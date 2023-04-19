@@ -4,11 +4,10 @@ import MyWalletLogo from "../components/MyWalletLogo"
 import { useState } from "react"
 import axios from "axios"
 
-export default function SignUpPage() {
+export default function SignUpPage({email, setEmail, password, setPassword}) {
 
   const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  
   const [confirmPassword, setConfirmPassword] = useState("")
   const [disabled, setDisabled] = useState(false)
   const navigate = useNavigate()
@@ -19,14 +18,18 @@ export default function SignUpPage() {
     if (password !== confirmPassword) return alert("A senha e confirmação são diferentes")
     setDisabled(true)
 
-    axios.post("localhost:5000/cadastro", body)
+    axios.post("https://mywallet-api-a26k.onrender.com/cadastro", body)
     .then(res => {
       console.log(res)
       navigate("/")
     })
     .catch(err => {
-      console.log(err.message)
+      alert(`${err.response.data} | statuscode:${err.response.status}`)
       setDisabled(false)
+      setName("")
+      setEmail("")
+      setPassword("")
+      setConfirmPassword("")
     })
   }
 
@@ -34,10 +37,10 @@ export default function SignUpPage() {
     <SingUpContainer>
       <form>
         <MyWalletLogo />
-        <input placeholder="Nome" onChange={(e)=>setName(e.target.value)} disabled={disabled} type="text" />
-        <input placeholder="E-mail" onChange={(e)=>setEmail(e.target.value)} disabled={disabled} type="email" />
-        <input placeholder="Senha" onChange={(e)=>setPassword(e.target.value)} disabled={disabled} type="password" autocomplete="new-password" />
-        <input placeholder="Confirme a senha" onChange={(e)=>setConfirmPassword(e.target.value)} disabled={disabled} type="password" autocomplete="new-password" />
+        <input placeholder="Nome" onChange={(e)=>setName(e.target.value)} value={name} disabled={disabled} type="text" />
+        <input placeholder="E-mail" onChange={(e)=>setEmail(e.target.value)} value={email} disabled={disabled} type="email" />
+        <input placeholder="Senha" onChange={(e)=>setPassword(e.target.value)} value={password} disabled={disabled} type="password" autoComplete="new-password" />
+        <input placeholder="Confirme a senha" onChange={(e)=>setConfirmPassword(e.target.value)} value={confirmPassword} disabled={disabled} type="password" autoComplete="new-password" />
         <button onClick={submitSignUp} disabled={disabled}>Cadastrar</button>
       </form>
 

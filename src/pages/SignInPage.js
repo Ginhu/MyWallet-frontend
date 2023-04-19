@@ -2,13 +2,13 @@ import styled from "styled-components"
 import { Link } from "react-router-dom"
 import MyWalletLogo from "../components/MyWalletLogo"
 
-export default function SignInPage() {
+export default function SignInPage({email, setEmail, password, setPassword}) {
   return (
     <SingInContainer>
       <form>
         <MyWalletLogo />
-        <input placeholder="E-mail" type="email" />
-        <input placeholder="Senha" type="password" autocomplete="new-password" />
+        <input placeholder="E-mail" value={email} type="email" />
+        <input placeholder="Senha" value={password} type="password" autoComplete="new-password" />
         <button>Entrar</button>
       </form>
 
