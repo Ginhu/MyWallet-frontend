@@ -7,7 +7,7 @@ export default function TransactionItem({date, description, type, value}) {
                 <span>{date}</span>
                 <strong>{description}</strong>
             </div>
-            <Value color={type === "saida" ? "negativo" : "positivo"}>{value}</Value>
+            <Value color={type === "saida" ? "negativo" : "positivo"}>R$ {value.replace(".", ",")}</Value>
         </ListItemContainer>
     )
 }

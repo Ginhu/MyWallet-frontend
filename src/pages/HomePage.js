@@ -3,7 +3,7 @@ import { BiExit } from "react-icons/bi"
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import TransactionItem from "../components/transactionItem"
 
 
@@ -11,8 +11,11 @@ export default function HomePage({name, setName}) {
   
   const [item, setItem] = useState([{date: "01/01/2001", description: "lalala", type: "saida", value: "R$ 1,00", _id: "11"},{date: "02/02/2002", description: "lelele", type: "entrada", value: "R$ 2,00",_id: "12"} ])
   const navigate = useNavigate()
+  const [total, setTotal] = useState()
 
   useEffect(()=>{
+    
+    let soma = 0
     axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`
     axios.get("https://mywallet-api-a26k.onrender.com/login")
     .then(res => {
@@ -20,11 +23,20 @@ export default function HomePage({name, setName}) {
         alert("Deslogado da aplicação!")
         return navigate("/")
       }
+      res.data.transactions.map((el)=> {
+        if(el.type === "saida") {
+          return soma-=parseFloat(el.value)
+        } else {
+          return soma+=parseFloat(el.value)
+        }
+      })
+      setTotal(soma.toFixed(2).replace(".", ","))
 
       setName(res.data.name)
       setItem(res.data.transactions)
     })
-  },[])
+    .catch(err=>alert(err.response.data))
+  })
 
   function clickButton (entry) {
     navigate(`/nova-transacao/${entry}`)
@@ -49,7 +61,7 @@ export default function HomePage({name, setName}) {
 
         <article>
           <strong>Saldo</strong>
-          <Value color={"positivo"}>2880,00</Value>
+          <Value color={"positivo"}>R$ {total}</Value>
         </article>
       </TransactionsContainer>
 
@@ -127,16 +139,4 @@ const Value = styled.div`
   font-size: 16px;
   text-align: right;
   color: ${(props) => (props.color === "positivo" ? "green" : "red")};
-`
-const ListItemContainer = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  color: #000000;
-  margin-right: 10px;
-  div span {
-    color: #c6c6c6;
-    margin-right: 10px;
-  }
 `
