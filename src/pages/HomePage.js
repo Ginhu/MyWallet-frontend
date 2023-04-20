@@ -12,7 +12,7 @@ export default function HomePage({name, setName}) {
   const [item, setItem] = useState([{date: "01/01/2001", description: "lalala", type: "saida", value: "R$ 1,00", _id: "11"},{date: "02/02/2002", description: "lelele", type: "entrada", value: "R$ 2,00",_id: "12"} ])
   const navigate = useNavigate()
 
-  /* useEffect(()=>{
+  useEffect(()=>{
     axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`
     axios.get("https://mywallet-api-a26k.onrender.com/login")
     .then(res => {
@@ -24,7 +24,7 @@ export default function HomePage({name, setName}) {
       setName(res.data.name)
       setItem(res.data.transactions)
     })
-  },[]) */
+  },[])
 
   function clickButton (entry) {
     navigate(`/nova-transacao/${entry}`)
