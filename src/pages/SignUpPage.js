@@ -4,9 +4,9 @@ import MyWalletLogo from "../components/MyWalletLogo"
 import { useState } from "react"
 import axios from "axios"
 
-export default function SignUpPage({email, setEmail, password, setPassword}) {
+export default function SignUpPage({email, setEmail, password, setPassword, name, setName}) {
 
-  const [name, setName] = useState("")
+  
   
   const [confirmPassword, setConfirmPassword] = useState("")
   const [disabled, setDisabled] = useState(false)

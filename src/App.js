@@ -8,17 +8,17 @@ import { useState } from "react"
 
 export default function App() {
 
+  const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
 
   return (
     <PagesContainer>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<SignInPage email={email} setEmail={setEmail} password={password} setPassword={setPassword}/>} />
-          <Route path="/cadastro" element={<SignUpPage email={email} setEmail={setEmail} password={password} setPassword={setPassword}/>} />
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/cadastro" element={<SignUpPage name={name} setName={setName} email={email} setEmail={setEmail} password={password} setPassword={setPassword}/>} />
+          <Route path="/home" element={<HomePage name={name} setName={setName} />} />
           <Route path="/nova-transacao/:tipo" element={<TransactionsPage />} />
         </Routes>
       </BrowserRouter>

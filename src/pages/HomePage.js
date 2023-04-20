@@ -1,32 +1,50 @@
 import styled from "styled-components"
 import { BiExit } from "react-icons/bi"
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
+import { useEffect, useState } from "react"
+import axios from "axios"
+import { Link, useNavigate } from "react-router-dom"
+import TransactionItem from "../components/transactionItem"
 
-export default function HomePage() {
+
+export default function HomePage({name, setName}) {
+  
+  const [item, setItem] = useState([{date: "01/01/2001", description: "lalala", type: "saida", value: "R$ 1,00", _id: "11"},{date: "02/02/2002", description: "lelele", type: "entrada", value: "R$ 2,00",_id: "12"} ])
+  const navigate = useNavigate()
+
+  /* useEffect(()=>{
+    axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`
+    axios.get("https://mywallet-api-a26k.onrender.com/login")
+    .then(res => {
+      if (res.status === 401) {
+        alert("Deslogado da aplicação!")
+        return navigate("/")
+      }
+
+      setName(res.data.name)
+      setItem(res.data.transactions)
+    })
+  },[]) */
+
+  function clickButton (entry) {
+    navigate(`/nova-transacao/${entry}`)
+  }
+
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, Fulano</h1>
+        <h1>Olá, {name.length !== 0 && name}</h1>
         <BiExit />
       </Header>
 
       <TransactionsContainer>
         <ul>
-          <ListItemContainer>
-            <div>
-              <span>30/11</span>
-              <strong>Almoço mãe</strong>
-            </div>
-            <Value color={"negativo"}>120,00</Value>
-          </ListItemContainer>
-
-          <ListItemContainer>
-            <div>
-              <span>15/11</span>
-              <strong>Salário</strong>
-            </div>
-            <Value color={"positivo"}>3000,00</Value>
-          </ListItemContainer>
+          {item.map((el)=> <TransactionItem 
+          key={el._id} date={el.date} 
+          description={el.description} 
+          type={el.type} 
+          value={el.value}/>
+          )}
         </ul>
 
         <article>
@@ -37,14 +55,17 @@ export default function HomePage() {
 
 
       <ButtonsContainer>
-        <button>
+        
+        <button onClick={()=>clickButton("entrada")}>
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button>
+       
+        <button onClick={()=>clickButton("saida")}>
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>
+        
       </ButtonsContainer>
 
     </HomeContainer>
