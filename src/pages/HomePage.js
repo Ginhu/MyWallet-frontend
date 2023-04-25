@@ -124,6 +124,9 @@ const TransactionsContainer = styled.article`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  ul {
+    overflow-y: scroll;
+  }
   article {
     display: flex;
     justify-content: space-between;   
