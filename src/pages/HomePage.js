@@ -18,26 +18,29 @@ export default function HomePage({name, setName, setEmail, setPassword}) {
     
     let soma = 0
     axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`
-    axios.get("https://mywallet-api-a26k.onrender.com/login")
+    axios.get(`${process.env.REACT_APP_API_URL}/login`)
     .then(res => {
-      res.data.transactions.map((el)=> {
-        if(el.type === "saida") {
-          return soma-=parseFloat(el.value)
-        } else {
-          return soma+=parseFloat(el.value)
-        }
+      axios.get(`${process.env.REACT_APP_API_URL}/transactions`)
+      .then(res => {
+        res.data.transactions.map((el)=> {
+          if(el.type === "saida") {
+            return soma-=parseFloat(el.value)
+          } else {
+            return soma+=parseFloat(el.value)
+          }
+        })
+        setTotal(soma.toFixed(2).replace(".", ","))
+        setTotalcolor(soma)
+  
+        setName(res.data.name)
+        setItem(res.data.transactions)
       })
-      setTotal(soma.toFixed(2).replace(".", ","))
-      setTotalcolor(soma)
-
-      setName(res.data.name)
-      setItem(res.data.transactions)
+      .catch(err=>alert(err.response.data))
     })
     .catch(err=>{
       alert(err.response.data)
       navigate("/")
     })
-
   })
 
   function clickButton (entry) {
@@ -46,10 +49,14 @@ export default function HomePage({name, setName, setEmail, setPassword}) {
 
   function logout() {
     window.confirm("Deseja mesmo deslogar?")
-    localStorage.clear()
-    setEmail("")
-    setPassword("")
-    navigate("/")
+    axios.delete(`${process.env.REACT_APP_API_URL}/login`)
+    .then(()=>{
+      localStorage.clear()
+      setEmail("")
+      setPassword("")
+      navigate("/")
+    })
+    .catch(err=>console.log(err.response.data))
   }
 
   return (

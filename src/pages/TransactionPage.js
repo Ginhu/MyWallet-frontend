@@ -11,7 +11,7 @@ export default function TransactionsPage() {
 
   useEffect(()=>{
     axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`
-    axios.get("https://mywallet-api-a26k.onrender.com/login")
+    axios.get(`${process.env.REACT_APP_API_URL}/login`)
     .then()
     .catch(err=>{
       alert(err.response.data)
@@ -24,7 +24,7 @@ export default function TransactionsPage() {
     const data = {value, description, type: tipo}
     if(!value || !description) return alert("Todos os campos devem ser preenchidos para continuar")
 
-    axios.post("https://mywallet-api-a26k.onrender.com/transactions", data)
+    axios.post(`${process.env.REACT_APP_API_URL}/transactions`, data)
     .then(res => {
       if (res.status === 401) {
         alert("Deslogado da aplicação!")

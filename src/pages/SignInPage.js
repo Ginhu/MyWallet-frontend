@@ -14,7 +14,7 @@ export default function SignInPage({email, setEmail, password, setPassword}) {
     if (!password) return alert("É necessário informar a senha para realizar o login")
     const body = {email, password}
     setDisabled(true)
-    axios.post("https://mywallet-api-a26k.onrender.com/login", body)
+    axios.post(`${process.env.REACT_APP_API_URL}/login`, body)
     .then(res=>{
       console.log(res)
       localStorage.setItem("access_token", res.data)

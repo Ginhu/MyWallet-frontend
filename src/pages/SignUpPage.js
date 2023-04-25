@@ -18,7 +18,7 @@ export default function SignUpPage({email, setEmail, password, setPassword, name
     if (password !== confirmPassword) return alert("A senha e confirmação são diferentes")
     setDisabled(true)
 
-    axios.post("https://mywallet-api-a26k.onrender.com/cadastro", body)
+    axios.post(`${process.env.REACT_APP_API_URL}/cadastro`, body)
     .then(res => {
       console.log(res)
       navigate("/")
