@@ -12,15 +12,11 @@ export default function TransactionsPage() {
   useEffect(()=>{
     axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`
     axios.get("https://mywallet-api-a26k.onrender.com/login")
-    .then(res => {
-      if (res.status === 401) {
-        alert("Deslogado da aplicação!")
-        return navigate("/")
-      }
-      return console.log(res)
-      
+    .then()
+    .catch(err=>{
+      alert(err.response.data)
+      navigate("/")
     })
-    .catch(err=>alert(err.response.data))
   })
 
   function submitTransaction(event) {

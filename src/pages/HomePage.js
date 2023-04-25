@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom"
 import TransactionItem from "../components/transactionItem"
 
 
-export default function HomePage({name, setName}) {
+export default function HomePage({name, setName, setEmail, setPassword}) {
   
-  const [item, setItem] = useState([{date: "01/01/2001", description: "lalala", type: "saida", value: "R$ 1,00", _id: "11"},{date: "02/02/2002", description: "lelele", type: "entrada", value: "R$ 2,00",_id: "12"} ])
+  const [item, setItem] = useState([])
   const navigate = useNavigate()
   const [total, setTotal] = useState()
   const [totalcolor, setTotalcolor] = useState()
@@ -20,10 +20,6 @@ export default function HomePage({name, setName}) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`
     axios.get("https://mywallet-api-a26k.onrender.com/login")
     .then(res => {
-      if (res.status === 401) {
-        alert("Deslogado da aplicação!")
-        return navigate("/")
-      }
       res.data.transactions.map((el)=> {
         if(el.type === "saida") {
           return soma-=parseFloat(el.value)
@@ -37,18 +33,30 @@ export default function HomePage({name, setName}) {
       setName(res.data.name)
       setItem(res.data.transactions)
     })
-    .catch(err=>alert(err.response.data))
+    .catch(err=>{
+      alert(err.response.data)
+      navigate("/")
+    })
+
   })
 
   function clickButton (entry) {
     navigate(`/nova-transacao/${entry}`)
   }
 
+  function logout() {
+    window.confirm("Deseja mesmo deslogar?")
+    localStorage.clear()
+    setEmail("")
+    setPassword("")
+    navigate("/")
+  }
+
   return (
     <HomeContainer>
       <Header>
         <h1>Olá, {name.length !== 0 && name}</h1>
-        <BiExit />
+        <BiExit onClick={logout}/>
       </Header>
 
       <TransactionsContainer>
