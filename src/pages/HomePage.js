@@ -12,6 +12,7 @@ export default function HomePage({name, setName}) {
   const [item, setItem] = useState([{date: "01/01/2001", description: "lalala", type: "saida", value: "R$ 1,00", _id: "11"},{date: "02/02/2002", description: "lelele", type: "entrada", value: "R$ 2,00",_id: "12"} ])
   const navigate = useNavigate()
   const [total, setTotal] = useState()
+  const [totalcolor, setTotalcolor] = useState()
 
   useEffect(()=>{
     
@@ -31,6 +32,7 @@ export default function HomePage({name, setName}) {
         }
       })
       setTotal(soma.toFixed(2).replace(".", ","))
+      setTotalcolor(soma)
 
       setName(res.data.name)
       setItem(res.data.transactions)
@@ -61,7 +63,7 @@ export default function HomePage({name, setName}) {
 
         <article>
           <strong>Saldo</strong>
-          <Value color={"positivo"}>R$ {total}</Value>
+          <Value color={totalcolor >= 0 ?"positivo":"negativo"}>R$ {total}</Value>
         </article>
       </TransactionsContainer>
 
