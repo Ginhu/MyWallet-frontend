@@ -69,7 +69,7 @@ export default function HomePage({name, setName, setEmail, setPassword}) {
       <TransactionsContainer>
         <ul>
           {item.map((el)=> <TransactionItem 
-          key={el._id} date={el.date} 
+          key={el._id} id={el._id} date={el.date} 
           description={el.description} 
           type={el.type} 
           value={el.value}/>

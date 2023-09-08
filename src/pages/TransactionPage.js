@@ -14,7 +14,7 @@ export default function TransactionsPage() {
     axios.get(`${process.env.REACT_APP_API_URL}/login`)
     .then()
     .catch(err=>{
-      alert(err.response.data)
+      alert(`${err.response.data} | statuscode:${err.response.status}`)
       navigate("/")
     })
   })
