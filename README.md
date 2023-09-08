@@ -5,6 +5,6 @@ An easy to use financial manager. Track your revenues and expenses to learn how 
 
 
 <div style="display: inline_block" align="center" gap="25px"><br>
-  <img width="120px" height="auto" src="/assets/MyWallet_SignUp.png" />
-  <img src="/assets/MyWalletLogin.png" />
+  <img width="200px" height="auto" src="/assets/MyWallet_SignUp.png" />
+  <img width="200px" height="auto" src="/assets/MyWalletLogin.png" />
 </div><br>
