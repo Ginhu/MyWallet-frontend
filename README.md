@@ -4,10 +4,9 @@ An easy to use financial manager. Track your revenues and expenses to learn how 
 
 
 
-<div style="display: inline_block" align="center" gap="25px"><br>
-  <img width="180px" height="auto" src="/assets/MyWallet_SignUp.png" />
-  <img width="180px" height="auto" src="/assets/MyWallet_Login.png" />
-  <img width="180px" height="auto" src="/assets/MyWallet_Income.png" />
-  <img width="180px" height="auto" src="/assets/MyWallet_Expenses.png" />
-  <img width="180px" height="auto" src="/assets/MyWallet_mainIncomeXexpenses.png" />
+<div style="display: inline_block" align="center" gap="30px"><br>
+  <img width="200px" height="auto" src="/assets/MyWallet_SignUp.png" />
+  <img width="200px" height="auto" src="/assets/MyWallet_Login.png" />
+  <img width="200px" height="auto" src="/assets/MyWallet_Income.png" />
+  <img width="200px" height="auto" src="/assets/MyWallet_mainIncomeXexpenses.png" />
 </div><br>
