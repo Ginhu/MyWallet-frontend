@@ -8,8 +8,7 @@ An easy to use financial manager. Track your revenues and expenses to learn how 
   <img width="200px" height="auto" src="/assets/MyWallet_SignUp.png" />
   <img width="200px" height="auto" src="/assets/MyWallet_Login.png" />
   <img width="200px" height="auto" src="/assets/MyWallet_main.png" />
-  <img width="200px" height="auto" src="/assets/MyWallet_salario.png" />
-  <img width="200px" height="auto" src="/assets/MyWallet_main_salario.png" />
-  <img width="200px" height="auto" src="/assets/MyWallet_expenses.png" />
-  <img width="200px" height="auto" src="/assets/MyWallet_main_salaryXexpenses.png" />
+  <img width="200px" height="auto" src="/assets/MyWallet_Income.png" />
+  <img width="200px" height="auto" src="/assets/MyWallet_Expenses.png" />
+  <img width="200px" height="auto" src="/assets/MyWallet_mainIncomeXexpenses.png" />
 </div><br>
